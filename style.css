@@ -1,0 +1,273 @@
+/* ===== Базовые ===== */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    padding-bottom: 70px;
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #fafafa;
+    color: #222;
+}
+
+.content { padding: 40px 20px; text-align: center; }
+
+/* ===== Нижняя панель ===== */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    z-index: 100;
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #888;
+    font-size: 12px;
+    transition: color 0.2s;
+}
+.nav-item i { font-size: 20px; margin-bottom: 4px; }
+.nav-item.active { color: #007aff; }
+
+/* ===== Окно регистрации ===== */
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 20px;
+}
+.auth-box {
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.auth-box h1 { margin: 0; color: #333; }
+.auth-sub { color: #888; margin: 6px 0 18px; font-size: 14px; }
+
+.tabs {
+    display: flex;
+    background: #f2f2f2;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 16px;
+}
+.tab {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #888;
+    font-size: 14px;
+}
+.tab.active { background: #fff; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+
+.field { margin-bottom: 12px; }
+.field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+.field input:focus { border-color: #007aff; }
+
+.btn-main {
+    width: 100%;
+    padding: 12px;
+    background: #007aff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+}
+.btn-main:hover { background: #0066d6; }
+.btn-admin { background: linear-gradient(135deg, #f6c945, #e6a700); color: #222; margin-top: 10px; }
+.btn-admin:hover { background: linear-gradient(135deg, #e6a700, #c89000); }
+
+.msg { font-size: 13px; color: #e53935; min-height: 18px; margin: 10px 0 0; }
+.back-link { display: block; margin-top: 14px; font-size: 13px; color: #888; text-decoration: none; }
+.back-link:hover { color: #333; }
+
+/* ===== Профиль ===== */
+.profile-card {
+    max-width: 340px;
+    margin: 60px auto;
+    background: #fff;
+    padding: 30px 24px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #007aff;
+    color: #fff;
+    font-size: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+}
+.profile-card h2 {
+    margin: 8px 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.profile-card p { color: #888; margin: 0 0 10px; font-size: 14px; }
+.badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: #f2f2f2;
+    font-size: 13px;
+    margin: 10px 0 18px;
+}
+.badge.founder { background: gold; color: #333; font-weight: 700; }
+
+/* ===== Верификация (зелёная розетка) ===== */
+.verified-badge {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: #22c55e;
+    position: relative;
+    vertical-align: middle;
+    /* Розетка из 8 треугольников через clip-path */
+    clip-path: polygon(
+        50% 0%, 61% 9%, 75% 6%, 79% 19%, 92% 25%, 91% 39%, 100% 50%,
+        91% 61%, 94% 75%, 81% 79%, 75% 92%, 61% 91%, 50% 100%,
+        39% 91%, 25% 94%, 21% 81%, 8% 75%, 9% 61%, 0% 50%,
+        9% 39%, 6% 25%, 19% 21%, 25% 8%, 39% 9%
+    );
+}
+.verified-badge::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2.5px 2.5px 0;
+    transform: translate(-50%, -60%) rotate(45deg);
+}
+.verified-badge.small { width: 16px; height: 16px; }
+.verified-badge.small::after {
+    width: 3px;
+    height: 6px;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -60%) rotate(45deg);
+}
+
+/* ===== Админ-панель ===== */
+.admin-wrap {
+    max-width: 640px;
+    margin: 40px auto;
+    padding: 0 16px 60px;
+}
+.admin-wrap h1 { font-size: 26px; margin-bottom: 4px; }
+.admin-sub { color: #888; margin: 0 0 24px; font-size: 14px; }
+.not-founder {
+    padding: 20px;
+    background: #fee2e2;
+    color: #b91c1c;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.user-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 14px;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    gap: 10px;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #007aff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.user-name {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+}
+.user-email {
+    font-size: 12px;
+    color: #888;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+}
+.crown { font-size: 16px; }
+.hint { font-size: 12px; color: #888; }
+.btn-verify {
+    background: #22c55e;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.btn-verify:hover { background: #16a34a; }
+.btn-verify.revoke { background: #ef4444; }
+.btn-verify.revoke:hover { background: #dc2626; }
