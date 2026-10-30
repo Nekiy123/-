@@ -4,29 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СмотрюTV — Панель основателя</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header class="top-bar">
-        <div class="logo">📺 Смотрю<span>TV</span></div>
-        <button class="theme-toggle" id="themeToggle" title="Сменить тему">🌙</button>
+        <div class="logo">
+            <span class="logo-mark"><i class="fas fa-play"></i></span>
+            Смотрю<span class="logo-accent">TV</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">🌙</button>
     </header>
 
-    <div class="admin-wrap">
-        <h1>👑 Панель основателя</h1>
-        <p class="admin-sub">Управление верификацией пользователей</p>
-
-        <div id="notFounder" class="not-founder" style="display:none;">
-            Доступ только для основателя.
+    <main class="admin-page">
+        <div class="admin-header">
+            <h1>👑 Панель основателя</h1>
+            <p>Управление пользователями и модерацией</p>
         </div>
 
+        <div id="notFounder" class="not-founder" style="display:none;">Доступ только для основателя.</div>
+
         <div id="adminContent" style="display:none;">
+            <div class="admin-stats">
+                <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Всего</div></div>
+                <div class="stat-card"><div class="stat-num" id="statVerified">0</div><div class="stat-label">Верифицировано</div></div>
+                <div class="stat-card"><div class="stat-num" id="statBlocked">0</div><div class="stat-label">Заблокировано</div></div>
+            </div>
             <div class="users-list" id="usersList"></div>
         </div>
 
         <a href="profile.html" class="back-link">← В профиль</a>
+    </main>
+
+    <!-- Модалка модерации -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <h3 id="modalTitle">Действие</h3>
+            <div class="field">
+                <label>Причина</label>
+                <textarea id="modalReason" placeholder="Укажите причину..."></textarea>
+            </div>
+            <div class="field" id="modalDurationField">
+                <label>Срок действия</label>
+                <select id="modalDuration">
+                    <option value="1h">1 час</option>
+                    <option value="1d">1 день</option>
+                    <option value="7d">7 дней</option>
+                    <option value="30d">30 дней</option>
+                    <option value="forever">Навсегда</option>
+                </select>
+            </div>
+            <div class="btn-row">
+                <button class="btn-main btn-ghost" id="modalCancel">Отмена</button>
+                <button class="btn-main" id="modalConfirm">Подтвердить</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
