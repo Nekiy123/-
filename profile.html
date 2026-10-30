@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СмотрюTV — Профиль</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="profile-card" id="profileCard">
+        <div class="avatar" id="avatar">?</div>
+        <h2>
+            <span id="userName">Гость</span>
+            <span id="verifiedBadge" class="verified-badge" style="display:none;" title="Верифицирован"></span>
+        </h2>
+        <p id="userEmail">Вы не вошли в аккаунт</p>
+        <span class="badge" id="badge">Гость</span>
+
+        <button class="btn-main" id="logoutBtn" style="display:none;">Выйти</button>
+        <a href="register.html" class="btn-main" id="loginBtn">Войти / Регистрация</a>
+        <a href="admin.html" class="btn-main btn-admin" id="adminBtn" style="display:none;">👑 Панель основателя</a>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i><span>Главная</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-search"></i><span>Поиск</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fas fa-user"></i><span>Профиль</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+  </html>
