@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СмотрюTV — Регистрация</title>
+    <title>СмотрюTV — Вход</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="auth-body">
-
-    <button class="theme-toggle auth-theme" id="themeToggle" title="Сменить тему">🌙</button>
+    <button class="theme-toggle auth-theme" id="themeToggle" aria-label="Сменить тему">🌙</button>
 
     <div class="auth-box">
-        <h1>📺 Смотрю<span>TV</span></h1>
-        <p class="auth-sub">Создайте аккаунт</p>
+        <h1>Смотрю<span class="logo-accent">TV</span></h1>
+        <p class="auth-sub">Войдите или создайте аккаунт</p>
 
         <div class="tabs">
             <button type="button" id="tabReg" class="tab active">Регистрация</button>
             <button type="button" id="tabLogin" class="tab">Вход</button>
         </div>
 
-        <form id="authForm">
+        <form id="authForm" autocomplete="off">
             <div class="field" id="loginField">
-                <input type="text" id="login" placeholder="Логин">
+                <label>Логин</label>
+                <input type="text" id="login" placeholder="Ваш логин">
             </div>
             <div class="field">
-                <input type="email" id="email" placeholder="Почта" required>
+                <label>Почта</label>
+                <input type="email" id="email" placeholder="you@mail.ru" required>
             </div>
             <div class="field">
-                <input type="password" id="password" placeholder="Пароль" required>
+                <label>Пароль</label>
+                <input type="password" id="password" placeholder="••••••••" required>
             </div>
             <button type="submit" class="btn-main" id="submitBtn">Зарегистрироваться</button>
         </form>
@@ -38,4 +40,4 @@
 
     <script src="script.js"></script>
 </body>
-                </html>
+            </html>
