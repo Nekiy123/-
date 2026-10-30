@@ -9,23 +9,99 @@
 </head>
 <body>
 
-    <div class="content">
-        <h1>Добро пожаловать в СмотрюTV</h1>
-        <p>Смотри, общайся, будь в тренде.</p>
+    <!-- Верхняя панель -->
+    <header class="top-bar">
+        <div class="logo">📺 Смотрю<span>TV</span></div>
+        <button class="theme-toggle" id="themeToggle" title="Сменить тему">🌙</button>
+    </header>
+
+    <!-- Главный контент -->
+    <main class="content">
+        <section class="hero">
+            <h1>Добро пожаловать в СмотрюTV</h1>
+            <p>Смотри, общайся, будь в тренде.</p>
+        </section>
+
+        <!-- Категории -->
+        <section class="categories">
+            <h2>Категории</h2>
+            <div class="chips">
+                <button class="chip active">🔥 Всё</button>
+                <button class="chip">🎬 Фильмы</button>
+                <button class="chip">📺 Сериалы</button>
+                <button class="chip">🎵 Музыка</button>
+                <button class="chip">🎮 Игры</button>
+                <button class="chip">📰 Новости</button>
+            </div>
+        </section>
+
+        <!-- Карточки контента -->
+        <section class="cards">
+            <h2>Рекомендуем</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-thumb" style="background:linear-gradient(135deg,#ff6b6b,#ee5a6f);">🎬</div>
+                    <h3>Первый фильм</h3>
+                    <p>12 тыс. просмотров</p>
+                </div>
+                <div class="card">
+                    <div class="card-thumb" style="background:linear-gradient(135deg,#4ecdc4,#44a3aa);">📺</div>
+                    <h3>Новый сериал</h3>
+                    <p>8 тыс. просмотров</p>
+                </div>
+                <div class="card">
+                    <div class="card-thumb" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7);">🎵</div>
+                    <h3>Хиты недели</h3>
+                    <p>25 тыс. просмотров</p>
+                </div>
+                <div class="card">
+                    <div class="card-thumb" style="background:linear-gradient(135deg,#fdcb6e,#e17055);">🎮</div>
+                    <h3>Топ игр</h3>
+                    <p>15 тыс. просмотров</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Тренды -->
+        <section class="trends">
+            <h2>В тренде 🔥</h2>
+            <div class="trend-list">
+                <div class="trend-item"><span class="trend-num">1</span><div><b>Что смотреть в 2025</b><small>2.5 тыс. просмотров</small></div></div>
+                <div class="trend-item"><span class="trend-num">2</span><div><b>Обзор новинок кино</b><small>1.8 тыс. просмотров</small></div></div>
+                <div class="trend-item"><span class="trend-num">3</span><div><b>Лучшие сериалы</b><small>1.2 тыс. просмотров</small></div></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Окно поиска -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <div class="search-header">
+                <input type="text" id="searchInput" placeholder="Поиск фильмов, сериалов..." autofocus>
+                <button class="search-close" id="searchClose">✕</button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <p class="search-hint">Начните вводить запрос...</p>
+            </div>
+        </div>
     </div>
 
+    <!-- Нижняя панель -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
-            <i class="fas fa-home"></i><span>Главная</span>
+            <span class="nav-icon"><i class="fas fa-house"></i></span>
+            <span>Главная</span>
         </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-search"></i><span>Поиск</span>
+        <a href="#" class="nav-item" id="searchNav">
+            <span class="nav-icon"><i class="fas fa-magnifying-glass"></i></span>
+            <span>Поиск</span>
         </a>
         <a href="profile.html" class="nav-item">
-            <i class="fas fa-user"></i><span>Профиль</span>
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Профиль</span>
         </a>
     </nav>
 
     <script src="script.js"></script>
 </body>
-  </html>
+                    </html>
