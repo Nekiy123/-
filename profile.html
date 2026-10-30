@@ -9,6 +9,11 @@
 </head>
 <body>
 
+    <header class="top-bar">
+        <div class="logo">📺 Смотрю<span>TV</span></div>
+        <button class="theme-toggle" id="themeToggle" title="Сменить тему">🌙</button>
+    </header>
+
     <div class="profile-card" id="profileCard">
         <div class="avatar" id="avatar">?</div>
         <h2>
@@ -25,16 +30,19 @@
 
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
-            <i class="fas fa-home"></i><span>Главная</span>
+            <span class="nav-icon"><i class="fas fa-house"></i></span>
+            <span>Главная</span>
         </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-search"></i><span>Поиск</span>
+        <a href="index.html" class="nav-item" onclick="sessionStorage.setItem('openSearch','1')">
+            <span class="nav-icon"><i class="fas fa-magnifying-glass"></i></span>
+            <span>Поиск</span>
         </a>
         <a href="profile.html" class="nav-item active">
-            <i class="fas fa-user"></i><span>Профиль</span>
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Профиль</span>
         </a>
     </nav>
 
     <script src="script.js"></script>
 </body>
-  </html>
+                </html>
