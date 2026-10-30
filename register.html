@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СмотрюTV — Регистрация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-box">
+        <h1>СмотрюTV</h1>
+        <p class="auth-sub">Создайте аккаунт</p>
+
+        <div class="tabs">
+            <button id="tabReg" class="tab active">Регистрация</button>
+            <button id="tabLogin" class="tab">Вход</button>
+        </div>
+
+        <form id="authForm">
+            <div class="field" id="loginField">
+                <input type="text" id="login" placeholder="Логин">
+            </div>
+            <div class="field">
+                <input type="email" id="email" placeholder="Почта" required>
+            </div>
+            <div class="field">
+                <input type="password" id="password" placeholder="Пароль" required>
+            </div>
+            <button type="submit" class="btn-main" id="submitBtn">Зарегистрироваться</button>
+        </form>
+
+        <p class="msg" id="msg"></p>
+        <a href="index.html" class="back-link">← На главную</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+          </html>
