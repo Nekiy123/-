@@ -4,45 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СмотрюTV — Профиль</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header class="top-bar">
-        <div class="logo">📺 Смотрю<span>TV</span></div>
-        <button class="theme-toggle" id="themeToggle" title="Сменить тему">🌙</button>
+        <div class="logo">
+            <span class="logo-mark"><i class="fas fa-play"></i></span>
+            Смотрю<span class="logo-accent">TV</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">🌙</button>
     </header>
 
-    <div class="profile-card" id="profileCard">
-        <div class="avatar" id="avatar">?</div>
-        <h2>
-            <span id="userName">Гость</span>
-            <span id="verifiedBadge" class="verified-badge" style="display:none;" title="Верифицирован"></span>
-        </h2>
-        <p id="userEmail">Вы не вошли в аккаунт</p>
-        <span class="badge" id="badge">Гость</span>
+    <main class="profile-page">
+        <div class="profile-card" id="profileCard">
+            <div class="avatar-wrap">
+                <div class="avatar" id="avatar">?</div>
+                <button class="avatar-edit" id="avatarEdit" title="Изменить фото" style="display:none;">
+                    <i class="fas fa-camera"></i>
+                </button>
+            </div>
+            <h2>
+                <span id="userName">Гость</span>
+                <span id="verifiedBadge" class="verified-badge" style="display:none;"></span>
+            </h2>
+            <p class="email" id="userEmail">Вы не вошли в аккаунт</p>
+            <span class="badge" id="badge">Гость</span>
 
-        <button class="btn-main" id="logoutBtn" style="display:none;">Выйти</button>
-        <a href="register.html" class="btn-main" id="loginBtn">Войти / Регистрация</a>
-        <a href="admin.html" class="btn-main btn-admin" id="adminBtn" style="display:none;">👑 Панель основателя</a>
+            <div class="profile-actions">
+                <button class="btn-main btn-ghost" id="logoutBtn" style="display:none;">Выйти</button>
+                <a href="register.html" class="btn-main" id="loginBtn">Войти / Регистрация</a>
+                <a href="admin.html" class="btn-main btn-admin" id="adminBtn" style="display:none;">👑 Панель основателя</a>
+            </div>
+        </div>
+
+        <div class="settings-section" id="settingsSection" style="display:none;">
+            <h3>Настройки профиля</h3>
+            <button class="btn-main btn-ghost" id="changeAvatarBtn">
+                <i class="fas fa-image"></i> Сменить фото профиля
+            </button>
+        </div>
+    </main>
+
+    <div class="avatar-modal" id="avatarModal">
+        <div class="avatar-modal-box">
+            <h3>Фото профиля</h3>
+            <input type="file" id="avatarFile" accept="image/*" class="file-input">
+            <div class="btn-row">
+                <button class="btn-main btn-ghost" id="avatarCancel">Отмена</button>
+                <button class="btn-main" id="avatarSave">Сохранить</button>
+            </div>
+        </div>
     </div>
 
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <span class="nav-icon"><i class="fas fa-house"></i></span>
-            <span>Главная</span>
-        </a>
-        <a href="index.html" class="nav-item" onclick="sessionStorage.setItem('openSearch','1')">
-            <span class="nav-icon"><i class="fas fa-magnifying-glass"></i></span>
-            <span>Поиск</span>
-        </a>
-        <a href="profile.html" class="nav-item active">
-            <span class="nav-icon"><i class="fas fa-user"></i></span>
-            <span>Профиль</span>
-        </a>
+        <a href="index.html" class="nav-item"><i class="fas fa-house"></i><span class="nav-label">Главная</span></a>
+        <a href="search.html" class="nav-item"><i class="fas fa-magnifying-glass"></i><span class="nav-label">Поиск</span></a>
+        <a href="profile.html" class="nav-item active"><i class="fas fa-user"></i><span class="nav-label">Профиль</span></a>
     </nav>
 
     <script src="script.js"></script>
 </body>
-                </html>
+    </html>
