@@ -79,6 +79,37 @@ function isBlocked(user) {
 }
 
 // ==========================================
+// ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ (tooltip по клику)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("click", (e) => {
+        const target = e.target.closest("[data-tip]");
+        if (!target) {
+            document.querySelectorAll(".tip-bubble").forEach(b => b.remove());
+            return;
+        }
+        e.stopPropagation();
+        document.querySelectorAll(".tip-bubble").forEach(b => b.remove());
+
+        const bubble = document.createElement("div");
+        bubble.className = "tip-bubble";
+        bubble.textContent = target.dataset.tip;
+        document.body.appendChild(bubble);
+
+        const rect = target.getBoundingClientRect();
+        bubble.style.left = (rect.left + rect.width / 2) + "px";
+        bubble.style.top = (rect.top - 10) + "px";
+
+        requestAnimationFrame(() => bubble.classList.add("show"));
+
+        setTimeout(() => {
+            bubble.classList.remove("show");
+            setTimeout(() => bubble.remove(), 250);
+        }, 2200);
+    });
+});
+
+// ==========================================
 // РЕГИСТРАЦИЯ / ВХОД
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
@@ -131,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 founder: email === FOUNDER_EMAIL,
                 blocked: false,
                 blockedUntil: null,
+                blockReason: null,
                 blockHistory: [],
                 avatar: null,
                 createdAt: Date.now()
@@ -171,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const avatar = document.getElementById("avatar");
     const badge = document.getElementById("badge");
     const verifiedBadge = document.getElementById("verifiedBadge");
+    const crownBadge = document.getElementById("crownBadge");
     const logoutBtn = document.getElementById("logoutBtn");
     const loginBtn = document.getElementById("loginBtn");
     const adminBtn = document.getElementById("adminBtn");
@@ -187,7 +220,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let user = JSON.parse(localStorage.getItem("user_" + current));
     if (!user) { localStorage.removeItem("currentUser"); location.reload(); return; }
 
-    // Блокировка
     if (isBlocked(user)) {
         userName.textContent = user.login;
         userEmail.textContent = "Аккаунт заблокирован";
@@ -200,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Заполнение
     userName.textContent = user.login;
     userEmail.textContent = user.email;
 
@@ -216,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
         badge.textContent = "👑 Основатель";
         badge.classList.add("founder");
         adminBtn.style.display = "block";
+        crownBadge.style.display = "inline-block";
     } else {
         badge.textContent = user.verified ? "✅ Верифицирован" : "Пользователь";
         if (user.verified) badge.classList.add("verified");
@@ -231,7 +263,6 @@ document.addEventListener("DOMContentLoaded", () => {
         location.reload();
     };
 
-    // Аватар
     function openModal() { modal.classList.add("active"); }
     function closeModal() { modal.classList.remove("active"); fileInput.value = ""; }
 
@@ -326,6 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         users.forEach(u => {
             const isFounder = u.email === FOUNDER_EMAIL;
+            const isMe = u.email === me.email;
             const blocked = isBlocked(u);
             const row = document.createElement("div");
             row.className = "user-row" + (blocked ? " blocked" : "");
@@ -341,30 +373,41 @@ document.addEventListener("DOMContentLoaded", () => {
                 blockInfo = `<div style="font-size:11px;color:var(--danger);margin-top:4px">🚫 до ${until} · ${u.blockReason}</div>`;
             }
 
+            // Кнопки: основателю разрешаем верификацию себя, но не блок/удаление себя
+            let actions = "";
+            if (isFounder) {
+                actions = `
+                    <button class="btn-mini ${u.verified ? 'gray' : 'green'}" data-act="verify" data-email="${u.email}">
+                        ${u.verified ? 'Снять ✓' : 'Выдать ✓'}
+                    </button>
+                    <span style="font-size:12px;color:var(--text-muted)">Основатель</span>
+                `;
+            } else {
+                actions = `
+                    <button class="btn-mini ${u.verified ? 'gray' : 'green'}" data-act="verify" data-email="${u.email}">
+                        ${u.verified ? 'Снять ✓' : 'Выдать ✓'}
+                    </button>
+                    ${blocked
+                        ? `<button class="btn-mini green" data-act="unblock" data-email="${u.email}">Разблокировать</button>`
+                        : `<button class="btn-mini red" data-act="block" data-email="${u.email}">Заблокировать</button>`}
+                    <button class="btn-mini red" data-act="delete" data-email="${u.email}">Удалить</button>
+                `;
+            }
+
             row.innerHTML = `
                 <div class="user-info">
                     ${avatarHtml}
                     <div class="user-meta">
                         <div class="user-name">
                             ${u.login}
-                            ${u.verified ? '<span class="verified-badge small"></span>' : ''}
-                            ${isFounder ? '<span>👑</span>' : ''}
+                            ${u.verified ? '<span class="verified-badge small" data-tip="Это верифицированный аккаунт"></span>' : ''}
+                            ${isFounder ? '<span style="cursor:pointer" data-tip="Это основатель проекта">👑</span>' : ''}
                         </div>
                         <div class="user-email">${u.email}</div>
                         ${blockInfo}
                     </div>
                 </div>
-                <div class="user-actions">
-                    ${isFounder ? '<span style="font-size:12px;color:var(--text-muted)">Основатель</span>' : `
-                        <button class="btn-mini ${u.verified ? 'gray' : 'green'}" data-act="verify" data-email="${u.email}">
-                            ${u.verified ? 'Снять ✓' : 'Выдать ✓'}
-                        </button>
-                        ${blocked
-                            ? `<button class="btn-mini green" data-act="unblock" data-email="${u.email}">Разблокировать</button>`
-                            : `<button class="btn-mini red" data-act="block" data-email="${u.email}">Заблокировать</button>`}
-                        <button class="btn-mini red" data-act="delete" data-email="${u.email}">Удалить</button>
-                    `}
-                </div>
+                <div class="user-actions">${actions}</div>
             `;
             usersList.appendChild(row);
         });
@@ -404,12 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (act === "delete") {
                     openModal(`Удалить: ${user.login}?`, (reason) => {
                         user.blockHistory = user.blockHistory || [];
-                        user.blockHistory.push({
-                            type: "delete",
-                            reason,
-                            by: me.email,
-                            at: Date.now()
-                        });
+                        user.blockHistory.push({ type: "delete", reason, by: me.email, at: Date.now() });
                         localStorage.removeItem("user_" + email);
                         toast("Аккаунт удалён");
                     }, false);
@@ -458,22 +496,4 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener("input", () => {
         const q = input.value.trim().toLowerCase();
         if (!q) {
-            results.innerHTML = `<div class="search-empty"><i class="fas fa-magnifying-glass"></i>Начните вводить запрос</div>`;
-            return;
-        }
-        render(items.filter(i => i.title.toLowerCase().includes(q)));
-    });
-});
-
-// ==========================================
-// ЧИПЫ КАТЕГОРИЙ
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const chips = document.querySelectorAll(".chip");
-    chips.forEach(chip => {
-        chip.onclick = () => {
-            chips.forEach(c => c.classList.remove("active"));
-            chip.classList.add("active");
-        };
-    });
-});
+            results.inner
